@@ -21,9 +21,7 @@ var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significan
 
 // Grab data
 d3.json(link).then(function(data) {
- 
-//  GET color radius call to the query URL
-d3.json(link, function(data) {
+
     function styleInfo(feature) {
       return {
         opacity: 1,
@@ -36,4 +34,3 @@ d3.json(link, function(data) {
       };
     }
 })
-    
