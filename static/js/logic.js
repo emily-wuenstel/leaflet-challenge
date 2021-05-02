@@ -8,7 +8,7 @@ var myMap = L.map("mapid", {
   
   // Adding tile layer
   L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-    // attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+    attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
     tileSize: 512,
     maxZoom: 18,
     zoomOffset: -1,
@@ -33,4 +33,25 @@ d3.json(link).then(function(data) {
         weight: 0.5
       };
     }
+
+    // set different color from magnitude
+    function getColor(magnitude) {
+        switch (true) {
+        case magnitude > 5:
+            return "#ea2c2c";
+        case magnitude > 4:
+            return "#ea822c";
+        case magnitude > 3:
+            return "#ee9c00";
+        case magnitude > 2:
+            return "#eecc00";
+        case magnitude > 1:
+            return "#d4ee00";
+        default:
+            return "#98ee00";
+    }
+  }
+
+
+
 })
