@@ -16,7 +16,24 @@ var myMap = L.map("mapid", {
     accessToken: API_KEY
   }).addTo(myMap);
 
-  // Use this link to get the geojson data.
-var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson";
+// Link to access data for this visual
+var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson";
 
+// Grab data
+d3.json(link).then(function(data) {
+ 
+//  GET color radius call to the query URL
+d3.json(link, function(data) {
+    function styleInfo(feature) {
+      return {
+        opacity: 1,
+        fillOpacity: 1,
+        fillColor: getColor(feature.properties.mag),
+        color: "#000000",
+        radius: getRadius(feature.properties.mag),
+        stroke: true,
+        weight: 0.5
+      };
+    }
+})
     
