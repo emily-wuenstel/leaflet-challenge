@@ -34,7 +34,7 @@ d3.json(link).then(function(data) {
       };
     }
 
-    // set different color from magnitude
+    // Generate colors based on magnitude
     function getColor(magnitude) {
         switch (true) {
         case magnitude > 5:
@@ -52,6 +52,36 @@ d3.json(link).then(function(data) {
     }
   }
 
+    // Create radius depending on magnitude
+    function getRadius(magnitude) {
+        if (magnitude === 0) {
+          return 1;
+        }
 
+        return magnitude * 4;
+    }
+
+    // Create GeoJSON layer and add to map 
+    L.geoJson(data, {
+    
+        pointToLayer: function(feature, latlng) {
+          return L.circleMarker(latlng);
+        },
+       
+        style: styleInfo,
+        //popups
+        onEachFeature: function(feature, layer) {
+          layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
+        }
+      }).addTo(myMap);
+
+    // create legend
+    var legend = L.control({
+        position: "bottomright"
+      });
+
+
+    // Add map legend
+    legend.addTo(myMap);
 
 })
